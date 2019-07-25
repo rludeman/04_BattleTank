@@ -1,0 +1,41 @@
+Tank Game
+Game Design Document
+Author: Ryan Ludeman
+Date: 7/24/2019
+----------------------------
+
+Contents
+ - Concept
+ - Rules
+ - Requirements
+ 
+ 
+Concept
+----------------------------
+Game about controlling a virtual tank and destroying the enemy tank before it destroys you.
+
+
+Rules
+----------------------------
+YOu win when you succesfully destroy the enemy tank.
+You lose when your tank is destroyed.  
+The player can control the tank in a realistic manor (treads, turret, cannon) in order to manuevor and aim at destroying the enemy.
+The player cannot leave the arena or manipulate the tank in an unrealistic way.
+
+
+Requirements
+----------------------------
+Tank assets
+	- Turret with barrel and eatures
+	- tank body with armor and features
+	- tank tracks that maneuver like a tank
+	
+Sounds
+	- tank noises (engine, heavy metalic noises, cannon noises, rotating noises, explosions)
+	- Projectile noises (whistling, explosinons)
+	- terrain noises (ground shifting, moving, debris falling)
+
+Effects
+	- projectile trail
+	- barrel flare
+	- esplosion effects (fire, ground, shockwave)
