@@ -5,6 +5,7 @@
 #include "Public/Tank.h"
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "Engine/World.h" // Used for world trace features
 #include "TankPlayerController.generated.h" // Must be the last include.
 
 /**
@@ -26,4 +27,6 @@ private:
 	// Begins moving the barrel so a shot would hit 
 	// where the crosshair intersects the world.
 	void AimTowardCrosshair();
+
+	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
 };
