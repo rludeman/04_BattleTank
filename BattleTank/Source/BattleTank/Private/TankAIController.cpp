@@ -21,6 +21,19 @@ void ATankAIController::BeginPlay()
 	}
 }
 
+void ATankAIController::Tick(float DeltaTime)
+{
+	auto ControlledTank = GetControlledTank();
+	auto PlayerTank = GetPlayerTank();
+	if (PlayerTank && ControlledTank)
+	{
+		ControlledTank->AimAt(PlayerTank->GetActorLocation());
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("%s failed to aim at player tank."), *ControlledTank->GetName());
+	}
+}
 
 ATank* ATankAIController::GetControlledTank() const
 {
