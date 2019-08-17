@@ -6,6 +6,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "Engine/World.h" // Used for world trace features
+#include "Engine/Public/DrawDebugHelpers.h"
 #include "TankPlayerController.generated.h" // Must be the last include.
 
 /**
@@ -29,6 +30,10 @@ private:
 	UPROPERTY(EditAnywhere)
 	float CrossHairYLocation = 0.33333;
 
+	// Range in km for aiming line trace
+	UPROPERTY(EditAnywhere)
+	float LineTraceRange = 1000000.;
+
 	ATank* GetControlledTank() const;
 
 	// Begins moving the barrel so a shot would hit 
@@ -38,4 +43,6 @@ private:
 	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
 
 	bool GetLookDirection(FVector2D ScreenLocation, FVector & LookDirection) const;
+
+	bool GetLookVecotrHitLocation(FVector LookDirection, FVector& HitLocation) const;
 };
