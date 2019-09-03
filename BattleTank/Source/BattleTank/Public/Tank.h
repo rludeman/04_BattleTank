@@ -31,8 +31,9 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 
-protected:
+private:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
-	
+	UPROPERTY(EditAnywhere, Category = Firing)
+	float LaunchSpeed = 100000.; // TODO find sensible default
 };
