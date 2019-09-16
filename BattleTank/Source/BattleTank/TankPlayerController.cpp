@@ -89,13 +89,13 @@ bool ATankPlayerController::GetLookVecotrHitLocation(FVector LookDirection, FVec
 		EndLocation,
 		ECollisionChannel::ECC_Visibility
 	);
-	DrawDebugLine(
+	/*DrawDebugLine(
 		GetWorld(),
 		StartLocation,
 		EndLocation,
 		FColor::Red,
 		false, -1.0, 0, 5.
-	);
+	);*/
 	HitLocation = HitResult.Location;
 	return HitResult.bBlockingHit;
 }
