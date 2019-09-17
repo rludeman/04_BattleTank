@@ -7,11 +7,10 @@ UTankAimingComponent::UTankAimingComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = false;
 
 	// ...
 }
-
 
 void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent * BarrelToSet)
 {
@@ -27,7 +26,6 @@ void UTankAimingComponent::BeginPlay()
 	
 }
 
-
 // Called every frame
 void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
@@ -42,28 +40,37 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	
 	FVector OutLaunchVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
+	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity
+	(
+		this,
+		OutLaunchVelocity, 
+		StartLocation, 
+		HitLocation, 
+		LaunchSpeed, 
+		false,
+		0.0,
+		0.0,
+		ESuggestProjVelocityTraceOption::DoNotTrace
+	);
 
 	// Calculate the out launch velocity
-	if (UGameplayStatics::SuggestProjectileVelocity
-	(
-		this, //const UObject * WorldContextObject,
-		OutLaunchVelocity, //FVector & TossVelocity,
-		StartLocation, //FVector StartLocation,
-		HitLocation, //FVector EndLocation,
-		LaunchSpeed, //float TossSpeed,
-		false, //bool bHighArc,
-		0.0, //float CollisionRadius,
-		0.0, //float OverrideGravityZ,
-		ESuggestProjVelocityTraceOption::DoNotTrace, //ESuggestProjVelocityTraceOption::Type TraceOption,
-		FCollisionResponseParams(), //const FCollisionResponseParams & ResponseParam,
-		TArray< AActor * >(), //const TArray< AActor * > & ActorsToIgnore,
-		false //bool bDrawDebug
-	))
+	if (bHaveAimSolution)
 	{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
-		UE_LOG(LogTemp, Warning, TEXT("Aiming at %s"), *AimDirection.ToString());
+		MoveBarrelTowards(AimDirection);
 	}
 	// If no trajectory found, do nothing
-	
+}
+
+void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
+{
+	// Calculate Difference between AimDirection and current rotation
+	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
+	auto AimAtRotator = AimDirection.Rotation();
+	auto DeltaRotator = AimAtRotator - BarrelRotator;
+	UE_LOG(LogTemp, Warning, TEXT("AimAtRotator: %s"), *AimAtRotator.ToString());
+
+	// Move Barrel the appropriate amount this frame
+	// Given a max elevation speed and frame time
 }
 
