@@ -7,8 +7,9 @@
 #include "Tank.generated.h"
 
 // Forward declaration
-class UTankBarrel;
 class UTankAimingComponent;
+class UTankBarrel;
+class UTankTurret;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -20,7 +21,10 @@ public:
 	ATank();
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
+	void SetBarrelReference(UTankBarrel * BarrelToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTurretReference(UTankTurret * TurretToSet);
 	
 	void AimAt(FVector HitLocation);
 
@@ -33,10 +37,9 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-
 private:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 100000.; // TODO find sensible default
+	float LaunchSpeed = 4000; 
 };
