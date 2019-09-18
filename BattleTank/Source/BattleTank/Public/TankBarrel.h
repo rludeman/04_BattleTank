@@ -18,13 +18,13 @@ public:
 	// -1 is max downward speed, and +1 is max up speed
 	void Elevate(float RelativeSpeed);
 
-private:
+//private: // making private breaks blueprint static mesh on HotReload.
 	UPROPERTY(EditAnywhere, Category = Setup)
-	float MaxDegreesPerSecond = 20; // Sensible Default
+	float MaxDegreesPerSecond = 5; 
 
 	UPROPERTY(EditAnywhere, Category = Setup)
-	float MaxElevationDegrees = 40; // Sensible Default
+	float MaxElevationDegrees = 40; 
 
 	UPROPERTY(EditAnywhere, Category = Setup)
-	float MinElevationDegrees = 0; // Sensible Default
+	float MinElevationDegrees = 0; 
 };
