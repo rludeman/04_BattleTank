@@ -24,14 +24,14 @@ public:
 
 private:
 	// location of cross hair relative to top-left of viewport
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float CrossHairXLocation = 0.5;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float CrossHairYLocation = 0.33333;
 
 	// Range in km for aiming line trace
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float LineTraceRange = 1000000.;
 
 	ATank* GetControlledTank() const;
